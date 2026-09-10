@@ -21,7 +21,8 @@ p, li { font-size: 1.05rem; line-height: 1.65; }
 .portrait { width: 100%; height: min(520px, 58vh); object-fit: cover; object-position: center top; filter: grayscale(1); }
 .section { border-top: 1px solid #cbc7bd; padding-block: 5.5rem; }
 .two-column { display: grid; grid-template-columns: 25% 1fr; gap: 2rem; }
-.two-column > h2 { margin: .5rem 0 0; }
+.two-column > h2 { margin: 0; transform: translateY(-10rem); }
+.hero + .section { margin-top: 5rem; }
 .body-copy { max-width: 750px; }
 .body-copy > :first-child { margin-top: 0; }
 .role { display: grid; grid-template-columns: 25% 1fr; gap: 2rem; border-top: 1px solid #d9d5cc; padding-block: 1.75rem; }
@@ -33,4 +34,4 @@ li + li { margin-top: .55rem; }
 .expertise { display: flex; flex-wrap: wrap; gap: .7rem; }
 .expertise span { border: 1px solid #9f9c94; border-radius: 99rem; padding: .55rem .8rem; }
 footer { border-top: 1px solid #cbc7bd; color: #666; padding-block: 2rem; }
-@media (max-width: 720px) { .site-header, main, footer { padding-inline: 1.25rem; } nav { gap: .8rem; font-size: .78rem; } .hero, .two-column, .role { grid-template-columns: 1fr; gap: 1.25rem; } .hero { min-height: auto; padding-block: 3rem 4rem; } .portrait { max-width: 360px; height: 480px; } .section { padding-block: 4rem; } }
+@media (max-width: 720px) { .site-header, main, footer { padding-inline: 1.25rem; } nav { gap: .8rem; font-size: .78rem; } .hero, .two-column, .role { grid-template-columns: 1fr; gap: 1.25rem; } .hero { min-height: auto; padding-block: 3rem 4rem; } .portrait { max-width: 360px; height: 480px; } .section { padding-block: 4rem; } .two-column > h2 { transform: translateY(-6.75rem); } .hero + .section { margin-top: 3.5rem; } }
