@@ -1,0 +1,11 @@
+# Project
+
+Personal resume in Github pages
+
+## Instructions
+
+- Scope & access is only for this repository
+- Goal of the repository is to provide a nice html page at `docs/` which will be used to host github pages. 
+- Update `README.md` when relevant changes are made.
+- **DO NOT** assume before making any changes. **ALWAYS** ask the user until common-understanding is reached before making major changes.
+- **DO NOT** include any personal information such as email, and phone number. LinkedIN and X/Twitter links are allowed. 
