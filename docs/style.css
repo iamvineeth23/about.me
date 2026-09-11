@@ -18,6 +18,12 @@ h3 { font-size: 1.15rem; margin: 0 0 1.5rem; }
 h4 { font-size: .78rem; letter-spacing: .08em; margin: 1.75rem 0 .55rem; text-transform: uppercase; }
 p, li { font-size: 1.05rem; line-height: 1.65; }
 .lead { color: #666; font-size: 1.15rem; }
+.contact { align-items: center; display: flex; gap: .5rem; }
+.contact svg { fill: none; flex: none; height: 1.25rem; stroke: currentColor; stroke-width: 1.8; width: 1.25rem; }
+.social { display: flex; flex-wrap: wrap; gap: .75rem; }
+.social a { align-items: center; display: flex; gap: .5rem; text-decoration: none; width: fit-content; }
+.social svg { display: block; width: 1.25rem; height: 1.25rem; fill: currentColor; }
+.social span { text-decoration: underline; text-underline-offset: .3em; }
 .portrait { width: 100%; height: min(520px, 58vh); object-fit: cover; object-position: center top; filter: grayscale(1); }
 .section { border-top: 1px solid #cbc7bd; padding: 2.75rem 0 5.5rem; }
 .two-column { display: grid; grid-template-columns: 25% 1fr; gap: 2rem; }
