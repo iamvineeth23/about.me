@@ -15,25 +15,49 @@ app.innerHTML = `
 `;
 
 app.querySelector('.hero').insertAdjacentHTML('beforeend', '<a class="scroll-cue" href="#summary" aria-label="Scroll to summary"></a>');
-app.querySelector('.hero').insertAdjacentHTML('afterend', '<div class="placeholder-panels" aria-hidden="true"><div class="placeholder-panel" style="--card-column: 1"></div><div class="placeholder-panel" style="--card-column: 2"></div><div class="placeholder-panel" style="--card-column: 3"></div><div class="placeholder-panel" style="--card-column: 4"></div></div>');
+app.querySelector('.hero').insertAdjacentHTML('afterend', '<div class="placeholder-stage" aria-hidden="true"><div class="collapsed-panels"></div><div class="placeholder-panels"><div class="placeholder-panel"></div><div class="placeholder-panel"></div><div class="placeholder-panel"></div><div class="placeholder-panel"></div></div></div>');
 
 const placeholderCards = [...app.querySelectorAll('.placeholder-panel')];
+const placeholderPanels = app.querySelector('.placeholder-panels');
+const collapsedPanels = app.querySelector('.collapsed-panels');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const collapseDuration = 700;
+let collapsedCount = 0;
+let collapseScrolls = [];
+let lastScrollY = scrollY;
+let nextCollapseAfter = 0;
 
-function updatePlaceholderCards() {
-  const shouldBeBoxes = placeholderCards.map((card) => card.getBoundingClientRect().top < window.innerHeight * .35);
-  if (shouldBeBoxes.every((isBox, index) => isBox === placeholderCards[index].classList.contains('is-box'))) return;
-
+function movePlaceholderCard(card, destination) {
   const previous = placeholderCards.map((card) => card.getBoundingClientRect());
-  placeholderCards.forEach((card, index) => card.classList.toggle('is-box', shouldBeBoxes[index]));
+  destination(card);
+  placeholderPanels.parentElement.classList.toggle('has-boxes', collapsedCount > 0);
   placeholderCards.forEach((card, index) => {
     const next = card.getBoundingClientRect();
     if (!reducedMotion && (previous[index].width !== next.width || previous[index].top !== next.top)) {
-      card.animate([{ transform: `translate(${previous[index].left - next.left}px, ${previous[index].top - next.top}px) scale(${previous[index].width / next.width}, ${previous[index].height / next.height})` }, { transform: 'none' }], { duration: 350, easing: 'ease', fill: 'both' });
+      card.getAnimations().forEach((animation) => animation.cancel());
+      card.animate([{ transform: `translate(${previous[index].left - next.left}px, ${previous[index].top - next.top}px) scale(${previous[index].width / next.width}, ${previous[index].height / next.height})` }, { transform: 'none' }], { duration: collapseDuration, easing: 'ease', fill: 'both' });
     }
   });
 }
 
+function updatePlaceholderCards() {
+  if (scrollY < lastScrollY) {
+    if (collapsedCount && scrollY < collapseScrolls[collapsedCount - 1] - 64) {
+      collapsedCount -= 1;
+      collapseScrolls.length = collapsedCount;
+      movePlaceholderCard(placeholderCards[collapsedCount], (card) => placeholderPanels.prepend(card));
+    }
+  } else if (collapsedCount < placeholderCards.length && performance.now() >= nextCollapseAfter && placeholderCards[collapsedCount].getBoundingClientRect().top < Math.max(window.innerHeight * .12, placeholderCards[collapsedCount].getBoundingClientRect().height + 48)) {
+    const card = placeholderCards[collapsedCount];
+    collapseScrolls.push(scrollY);
+    collapsedCount += 1;
+    nextCollapseAfter = performance.now() + collapseDuration;
+    movePlaceholderCard(card, (panel) => collapsedPanels.append(panel));
+  }
+  lastScrollY = scrollY;
+}
+
 addEventListener('scroll', updatePlaceholderCards, { passive: true });
 addEventListener('resize', updatePlaceholderCards);
+addEventListener('load', updatePlaceholderCards);
 updatePlaceholderCards();
