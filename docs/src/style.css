@@ -11,6 +11,8 @@ nav { display: flex; gap: 1.25rem; font-size: .9rem; }
 nav a { text-decoration: none; }
 nav a:hover, nav a:focus-visible { text-decoration: underline; text-underline-offset: .3em; }
 .hero { min-height: calc(100vh - 5.5rem); position: relative; display: grid; grid-template-columns: 1.3fr .7fr; gap: 3rem; align-items: center; }
+.download-resume { position: absolute; top: 1.5rem; right: 0; min-width: 15rem; padding: .8rem 1.5rem; border: 1px solid currentColor; border-radius: 999px; text-align: center; text-decoration: none; }
+.download-resume:hover, .download-resume:focus-visible { background: #121212; color: #f5f3ef; }
 .hero::after { background: linear-gradient(rgba(18, 18, 18, .27), transparent); border-top: 1px solid #cbc7bd; content: ""; height: 4.5rem; left: 50%; pointer-events: none; position: absolute; top: 100%; transform: translateX(-50%); width: 100vw; z-index: 1; }
 .scroll-cue { align-items: center; background: #f5f3ef; border: 1px solid rgba(18, 18, 18, .22); border-radius: 50%; bottom: -2rem; box-shadow: 0 .55rem .9rem rgba(18, 18, 18, .24), 0 1.2rem 2rem rgba(18, 18, 18, .14), inset 0 .08rem .12rem rgba(255, 255, 255, .9); display: flex; height: 4rem; justify-content: center; left: 50%; position: absolute; transform: translateX(-50%); transition: transform .2s ease, box-shadow .2s ease; width: 4rem; z-index: 2; }
 .scroll-cue::before { border-bottom: .24rem solid currentColor; border-right: .24rem solid currentColor; content: ""; height: .85rem; transform: translateY(-.18rem) rotate(45deg); width: .85rem; }
@@ -48,6 +50,7 @@ nav a:hover, nav a:focus-visible { text-decoration: underline; text-underline-of
 .placeholder-window:nth-of-type(n+3) { display: block; }
 .resume-content { display: flex; align-items: center; gap: 2rem; margin: clamp(5rem, 16vh, 10rem) 0 4rem clamp(1.25rem, 3vw, 2.5rem); }
 .resume-content p { color: #666; font-size: clamp(1.2rem, 2.5vw, 1.75rem); line-height: 1.4; margin: 0; max-width: 640px; }
+.resume-actions { display: grid; gap: .75rem; margin-left: auto; }
 .resume-content a { flex: none; margin-left: auto; display: inline-block; border: 1px solid currentColor; border-radius: 99rem; padding: .8rem 1.4rem; text-decoration: none; }
 .resume-content a:hover, .resume-content a:focus-visible { background: #121212; color: #f5f3ef; }
 .contact-card { border: 1px solid #cbc7bd; border-radius: 1rem; margin: clamp(5rem, 16vh, 10rem) 0 4rem clamp(1.25rem, 3vw, 2.5rem); padding: 1.5rem; }
@@ -93,6 +96,6 @@ li + li { margin-top: .55rem; }
 .expertise span { border: 1px solid #9f9c94; border-radius: 99rem; padding: .55rem .8rem; }
 footer { border-top: 1px solid #cbc7bd; color: #666; padding-block: 2rem; }
 @media (max-width: 720px) { html:has(.placeholder-stage) { scroll-snap-type: y proximity; } .site-header, main, footer { padding-inline: 1.25rem; } .site-header { display: block; padding-block: 1.25rem; } nav { flex-wrap: wrap; gap: .55rem .8rem; margin-top: .8rem; font-size: .78rem; } .hero, .two-column, .role { grid-template-columns: 1fr; gap: 1.25rem; } .hero { min-height: auto; padding: 2rem 1.25rem 2.5rem; } h1 { font-size: clamp(2.25rem, 11vw, 4.5rem); } .eyebrow { white-space: normal; } .portrait { max-width: 360px; height: min(480px, 110vw); } .placeholder-stage { margin-inline: -1.25rem; } .placeholder-window { padding-inline: 1.25rem; } .panel-indicator { width: min(calc(100% - 3rem), 450px); height: 2.75rem; margin-bottom: -2.75rem; flex-wrap: nowrap; } .panel-indicator a { width: 2.75rem; } .section { padding: 2rem 0 3rem; } .two-column > h2 { transform: none; } .hero + .section { margin-top: 0; } }
-@media (max-width: 720px) { .resume-content { align-items: flex-start; flex-direction: column; } .resume-content a { margin-left: 0; } }
+@media (max-width: 720px) { .download-resume { position: static; grid-row: 1; justify-self: start; min-width: 0; } .resume-content { align-items: flex-start; flex-direction: column; } .resume-actions, .resume-content a { margin-left: 0; } }
 @media (max-width: 720px) { .project-cards { grid-template-columns: 1fr; } }
 @media (max-width: 720px) { .more-talks { grid-template-columns: 1fr; } }
