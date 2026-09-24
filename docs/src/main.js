@@ -15,7 +15,7 @@ app.innerHTML = `
 `;
 
 app.querySelector('.hero').insertAdjacentHTML('beforeend', '<a class="scroll-cue" href="#summary" aria-label="Scroll to summary"></a>');
-app.querySelector('.hero').insertAdjacentHTML('afterend', '<div class="placeholder-stage" aria-hidden="true"><div class="collapsed-panels"></div><div class="placeholder-panels"><div class="placeholder-panel"></div><div class="placeholder-panel"></div><div class="placeholder-panel"></div><div class="placeholder-panel"></div></div></div>');
+app.querySelector('.hero').insertAdjacentHTML('afterend', '<div class="placeholder-stage"><div class="collapsed-panels"></div><div class="placeholder-panels"><div class="placeholder-panel placeholder-panel-talks"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="m10 8 6 4-6 4Z" /></svg><span>Watch my talks..</span></div><div class="placeholder-panel" aria-hidden="true"></div><div class="placeholder-panel" aria-hidden="true"></div><div class="placeholder-panel" aria-hidden="true"></div></div></div>');
 
 const placeholderCards = [...app.querySelectorAll('.placeholder-panel')];
 const placeholderPanels = app.querySelector('.placeholder-panels');

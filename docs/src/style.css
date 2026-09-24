@@ -19,7 +19,12 @@ nav a:hover, nav a:focus-visible { text-decoration: underline; text-underline-of
 .placeholder-panels { display: grid; gap: 2.5rem; }
 .placeholder-stage.has-boxes .placeholder-panels { padding-top: calc(var(--placeholder-card-size) + 2.5rem); }
 .placeholder-panel { border: 1px solid rgba(18, 18, 18, .22); border-radius: 1.25rem; box-shadow: 0 .85rem 1.6rem rgba(18, 18, 18, .20), 0 3rem 5rem rgba(18, 18, 18, .16); height: var(--placeholder-card-size); transform-origin: top left; }
+.placeholder-panel-talks { align-items: center; display: flex; gap: 1.25rem; padding: clamp(1.25rem, 3vw, 2.5rem); }
+.placeholder-panel-talks svg { fill: none; flex: none; height: 3rem; stroke: currentColor; stroke-width: 1.5; width: 3rem; }
+.placeholder-panel-talks span { font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 700; }
 .collapsed-panels .placeholder-panel { flex: 0 0 var(--placeholder-card-size); }
+.collapsed-panels .placeholder-panel-talks { justify-content: center; padding: 1rem; }
+.collapsed-panels .placeholder-panel-talks span { display: none; }
 .hero-copy, .two-column > *, .role > * { min-width: 0; }
 .hero-copy { max-width: 750px; }
 .eyebrow { color: #666; font-size: clamp(1rem, 2vw, 1.5rem); font-weight: 750; letter-spacing: .08em; margin: 0 0 1.25rem; text-transform: uppercase; }
