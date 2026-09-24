@@ -15,3 +15,25 @@ app.innerHTML = `
 `;
 
 app.querySelector('.hero').insertAdjacentHTML('beforeend', '<a class="scroll-cue" href="#summary" aria-label="Scroll to summary"></a>');
+app.querySelector('.hero').insertAdjacentHTML('afterend', '<div class="placeholder-panels" aria-hidden="true"><div class="placeholder-panel" style="--card-column: 1"></div><div class="placeholder-panel" style="--card-column: 2"></div><div class="placeholder-panel" style="--card-column: 3"></div><div class="placeholder-panel" style="--card-column: 4"></div></div>');
+
+const placeholderCards = [...app.querySelectorAll('.placeholder-panel')];
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function updatePlaceholderCards() {
+  const shouldBeBoxes = placeholderCards.map((card) => card.getBoundingClientRect().top < window.innerHeight * .35);
+  if (shouldBeBoxes.every((isBox, index) => isBox === placeholderCards[index].classList.contains('is-box'))) return;
+
+  const previous = placeholderCards.map((card) => card.getBoundingClientRect());
+  placeholderCards.forEach((card, index) => card.classList.toggle('is-box', shouldBeBoxes[index]));
+  placeholderCards.forEach((card, index) => {
+    const next = card.getBoundingClientRect();
+    if (!reducedMotion && (previous[index].width !== next.width || previous[index].top !== next.top)) {
+      card.animate([{ transform: `translate(${previous[index].left - next.left}px, ${previous[index].top - next.top}px) scale(${previous[index].width / next.width}, ${previous[index].height / next.height})` }, { transform: 'none' }], { duration: 350, easing: 'ease', fill: 'both' });
+    }
+  });
+}
+
+addEventListener('scroll', updatePlaceholderCards, { passive: true });
+addEventListener('resize', updatePlaceholderCards);
+updatePlaceholderCards();
