@@ -19,28 +19,56 @@ app.querySelector('.hero').insertAdjacentHTML('beforeend', '<a class="scroll-cue
 if (location.pathname.endsWith('/resume.html')) app.querySelector('.brand').href = './';
 
 if (!location.pathname.endsWith('/resume.html')) {
-  app.querySelector('.hero').insertAdjacentHTML('afterend', '<div class="placeholder-stage"><section class="placeholder-window"><div class="placeholder-panel placeholder-panel-talks"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="m10 8 6 4-6 4Z" /></svg><span>Watch my talks..</span></div></section><section class="placeholder-window"><div class="placeholder-panel placeholder-panel-talks"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 9-3 3 3 3M16 9l3 3-3 3M14 5l-4 14" /></svg><span>My Projects</span></div></section><section class="placeholder-window"><div class="placeholder-panel placeholder-panel-talks"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l3 3v15H6zM15 3v4h4M9 12h6M9 16h6" /></svg><span>Resume</span></div></section><section class="placeholder-window"><div class="placeholder-panel placeholder-panel-talks"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3zM3 7l9 6 9-6" /></svg><span>Contact Me</span></div></section></div>');
+  app.querySelector('.hero').insertAdjacentHTML('afterend', '<div class="placeholder-stage"><section class="placeholder-window"><div class="placeholder-panel placeholder-panel-talks"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="m10 8 6 4-6 4Z" /></svg><div><span>My Talks..</span><small>Ideas worth sharing</small></div></div></section><section class="placeholder-window"><div class="placeholder-panel placeholder-panel-talks"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 9-3 3 3 3M16 9l3 3-3 3M14 5l-4 14" /></svg><div><span>Projects</span><small>Things I&#39;m building..</small></div></div></section><section class="placeholder-window"><div class="placeholder-panel placeholder-panel-talks"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l3 3v15H6zM15 3v4h4M9 12h6M9 16h6" /></svg><div><span>Resume</span><small>Experience, expertise &amp; impact.</small></div></div><div class="resume-content"><p>Automotive cybersecurity leadership across security technologies, vehicle platforms and the full development lifecycle.</p><a href="./resume.html">View Resume</a></div></section><section class="placeholder-window"><div class="placeholder-panel placeholder-panel-talks"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3zM3 7l9 6 9-6" /></svg><div><span>Contact</span><small>Have something interesting to discuss?</small></div></div><div class="contact-content"><a href="mailto:vineeth@bharadwaj.de"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3zM3 7l9 6 9-6" /></svg><span>vineeth@bharadwaj.de</span></a><a href="https://x.com/vin_bharadwaj" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22H17l-4.9-6.4L6.5 22H3.4l7.3-8.3L3 2h6.4l4.4 5.8L18.9 2Zm-1.1 18h1.7L8.4 3.9H6.6L17.8 20Z" /></svg><span>vin_bharadwaj</span></a><a href="https://github.com/iamvineeth23" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 3 .8.1-.6.4-1.1.7-1.3-2.3-.3-4.7-1.1-4.7-5A3.9 3.9 0 0 1 6.7 8c-.1-.3-.5-1.3.1-2.8 0 0 .9-.3 2.9 1.1a10 10 0 0 1 5.2 0c2-1.4 2.9-1.1 2.9-1.1.6 1.5.2 2.5.1 2.8a3.9 3.9 0 0 1 1.1 2.7c0 3.9-2.4 4.7-4.7 5 .4.3.7.9.7 1.8V21c0 .3.2.6.7.5A10 10 0 0 0 12 2Z" /></svg><span>iamvineeth23</span></a></div></section></div>');
   app.querySelectorAll('main > .section, footer').forEach((element) => element.remove());
-  app.querySelector('nav').innerHTML = '<a href="./resume.html">Resume</a>';
-  const resumePanel = app.querySelector('.placeholder-window:nth-child(3) .placeholder-panel');
-  resumePanel.replaceWith(Object.assign(document.createElement('a'), { className: resumePanel.className, href: './resume.html', innerHTML: resumePanel.innerHTML }));
+  app.querySelector('.placeholder-window').insertAdjacentHTML('beforeend', '<div class="talk-cards"><a href="https://www.youtube.com/watch?v=EdPer-OhZd0" target="_blank" rel="noopener"><strong>Secure Our Streets 2024</strong><span>Shifting Left Vulnerability Management</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.7 2.7 0 0 0-1.9-1.9C18 4.8 12 4.8 12 4.8s-6 0-7.7.5a2.7 2.7 0 0 0-1.9 1.9A28 28 0 0 0 2 12a28 28 0 0 0 .4 4.8 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.8ZM10 15.5v-7l6 3.5-6 3.5Z" /></svg></a><a href="https://www.youtube.com/watch?v=BX1b2i-uL8I" target="_blank" rel="noopener"><strong>VulnCon24</strong><span>Finding Managing &amp; Preventing Vulnerabilities: An Automotive Perspective</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.7 2.7 0 0 0-1.9-1.9C18 4.8 12 4.8 12 4.8s-6 0-7.7.5a2.7 2.7 0 0 0-1.9 1.9A28 28 0 0 0 2 12a28 28 0 0 0 .4 4.8 2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9A28 28 0 0 0 22 12a28 28 0 0 0-.4-4.8ZM10 15.5v-7l6 3.5-6 3.5Z" /></svg></a></div>');
+  app.querySelector('.talk-cards').insertAdjacentHTML('beforeend', `
+    <article class="more-talks">
+      <div><strong>More talks</strong><ul>
+        <li><strong>Sec.SDV Europe 2026</strong> - Closing the Vulnerability Management loop for SDV</li>
+        <li><strong>Sec.SDV Europe 2025</strong> - Beyond Regulations: Proactive Vulnerability Management for SDV</li>
+        <li><strong>FAU Erlangen University (WS23 &amp; WS24)</strong> - Finding, Handling &amp; Preventing Automotive Software Vulnerabilities</li>
+      </ul></div>
+      <small>Talk not recoreded. Contact for slides</small>
+    </article>`);
+  app.querySelectorAll('.placeholder-window')[1].insertAdjacentHTML('beforeend', `
+    <div class="project-cards">
+      <article class="project-card"><div class="project-tags"><span>AI</span><span>Open source</span><span>Visualization</span></div><h3>AimViewer</h3><p>Visualizing LLM architecture, weights, activations and runtime flow to make models easier to inspect and understand.</p><span class="project-action">Private repo for now. Contact for source code</span></article>
+      <article class="project-card"><div class="project-tags"><span>Chess</span><span>AI</span><span>Experimental</span></div><h3>ChessWithJev</h3><p>Experimental implementation of playing Chess with Jev</p><span class="project-action">Private repo for now. Contact for source code</span></article>
+    </div>`);
+  app.querySelector('nav').innerHTML = '<a href="#panel-1">Talks</a><a href="#panel-2">Projects</a><a href="#panel-3">Resume</a><a href="#panel-4">Contact</a>';
   const windows = [...app.querySelectorAll('.placeholder-window')];
-  windows.forEach((window, index) => {
-    window.id = `panel-${index + 1}`;
-    const indicator = document.createElement('nav');
-    indicator.className = 'panel-indicator';
-    indicator.setAttribute('aria-label', 'Panel navigation');
-    windows.forEach((target, targetIndex) => {
-      const link = document.createElement('a');
-      link.href = `#panel-${targetIndex + 1}`;
-      link.setAttribute('aria-label', target.querySelector('span').textContent);
-      if (target === window) link.setAttribute('aria-current', 'step');
-      link.append(target.querySelector('svg').cloneNode(true));
-      indicator.append(link);
-    });
-    window.prepend(indicator);
+  const indicator = document.createElement('nav');
+  indicator.className = 'panel-indicator';
+  indicator.setAttribute('aria-label', 'Panel navigation');
+  const links = windows.map((panel, index) => {
+    panel.id = `panel-${index + 1}`;
+    const link = document.createElement('a');
+    link.href = `#${panel.id}`;
+    link.setAttribute('aria-label', panel.querySelector('span').textContent);
+    link.append(panel.querySelector('svg').cloneNode(true));
+    indicator.append(link);
+    return link;
   });
-  app.querySelector('.placeholder-stage').id = 'panels';
+  links[0].setAttribute('aria-current', 'step');
+  let activeIndex = 0;
+  const updateIndicator = () => {
+    indicator.hidden = windows[0].getBoundingClientRect().top > 0;
+    const index = windows.findIndex((panel) => {
+      const rect = panel.getBoundingClientRect();
+      return rect.top <= innerHeight / 2 && rect.bottom > innerHeight / 2;
+    });
+    if (index < 0 || index === activeIndex) return;
+    links[activeIndex].removeAttribute('aria-current');
+    links[index].setAttribute('aria-current', 'step');
+    activeIndex = index;
+  };
+  window.addEventListener('scroll', updateIndicator, { passive: true });
+  window.addEventListener('load', updateIndicator);
+  const stage = app.querySelector('.placeholder-stage');
+  stage.id = 'panels';
+  stage.prepend(indicator);
+  updateIndicator();
   const scrollCue = app.querySelector('.scroll-cue');
   scrollCue.href = '#panels';
   scrollCue.ariaLabel = 'Scroll to panels';
