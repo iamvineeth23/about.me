@@ -16,8 +16,8 @@ nav a:hover, nav a:focus-visible { text-decoration: underline; text-underline-of
 .scroll-cue:hover, .scroll-cue:focus-visible { box-shadow: 0 .75rem 1.1rem rgba(18, 18, 18, .26), 0 1.4rem 2.2rem rgba(18, 18, 18, .16), inset 0 .08rem .12rem rgba(255, 255, 255, .9); transform: translateX(-50%) translateY(-.15rem); }
 .placeholder-stage { --placeholder-card-size: clamp(7.6rem, 14vw, 10rem); margin: 5rem -2rem; }
 .collapsed-panels { display: flex; gap: 1.5rem; height: 0; position: sticky; top: 2rem; z-index: 1; }
-.placeholder-panels { display: grid; gap: 1.5rem; }
-.placeholder-stage.has-boxes .placeholder-panels { padding-top: calc(var(--placeholder-card-size) + 1.5rem); }
+.placeholder-panels { display: grid; gap: 2.5rem; }
+.placeholder-stage.has-boxes .placeholder-panels { padding-top: calc(var(--placeholder-card-size) + 2.5rem); }
 .placeholder-panel { border: 1px solid rgba(18, 18, 18, .22); border-radius: 1.25rem; box-shadow: 0 .85rem 1.6rem rgba(18, 18, 18, .20), 0 3rem 5rem rgba(18, 18, 18, .16); height: var(--placeholder-card-size); transform-origin: top left; }
 .collapsed-panels .placeholder-panel { flex: 0 0 var(--placeholder-card-size); }
 .hero-copy, .two-column > *, .role > * { min-width: 0; }
