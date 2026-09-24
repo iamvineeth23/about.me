@@ -18,7 +18,7 @@ nav a:hover, nav a:focus-visible { text-decoration: underline; text-underline-of
 .placeholder-stage { --placeholder-card-size: clamp(7.6rem, 14vw, 10rem); margin-inline: -2rem; }
 .placeholder-window { display: flex; align-items: center; min-height: 100vh; min-height: 100svh; padding-inline: 2rem; position: relative; scroll-snap-align: start; }
 .panel-indicator { position: absolute; top: clamp(2rem, 7vh, 4rem); left: 50%; transform: translateX(-50%); width: min(calc(100% - 4rem), 450px); justify-content: space-between; gap: 0; }
-.panel-indicator::before { content: ""; position: absolute; top: 50%; left: 0; right: 0; border-top: 1px solid currentColor; }
+.panel-indicator::before { content: ""; position: absolute; top: 50%; left: 50%; width: 100vw; transform: translateX(-50%); border-top: 1px solid rgba(18, 18, 18, .12); }
 .panel-indicator a { position: relative; display: grid; place-items: center; width: clamp(3rem, 5.5vw, 4rem); aspect-ratio: 1; border: 1px solid currentColor; border-radius: 50%; background: #f5f3ef; }
 .panel-indicator a::before { content: ""; position: absolute; inset: -.35rem; border: 1px dashed currentColor; border-radius: 50%; }
 .panel-indicator a[aria-current] { background: #121212; color: #f5f3ef; }
