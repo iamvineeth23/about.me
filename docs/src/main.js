@@ -13,3 +13,5 @@ app.innerHTML = `
   </main>
   <footer>Vineeth B. Prasanna</footer>
 `;
+
+app.querySelector('.hero').insertAdjacentHTML('beforeend', '<a class="scroll-cue" href="#summary" aria-label="Scroll to summary"></a>');
