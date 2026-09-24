@@ -21,8 +21,9 @@ nav a:hover, nav a:focus-visible { text-decoration: underline; text-underline-of
 .placeholder-window { display: flex; align-items: center; min-height: 100vh; min-height: 100svh; padding-inline: 2rem; position: relative; scroll-snap-align: start; }
 .panel-indicator { position: sticky; top: clamp(2rem, 7vh, 4rem); width: min(calc(100% - 4rem), 450px); height: 4rem; margin: 0 auto -4rem; align-items: center; justify-content: space-between; gap: 0; z-index: 3; }
 .panel-indicator[hidden] { display: none; }
-.panel-indicator::before { content: ""; position: absolute; inset-block: 0; left: 50%; width: 100vw; transform: translateX(-50%); background: linear-gradient(to bottom, #f5f3ef calc(50% - .5px), rgba(18, 18, 18, .12) 50%, #f5f3ef calc(50% + .5px)); }
-.panel-indicator a { position: relative; display: grid; place-items: center; width: clamp(3rem, 5.5vw, 4rem); aspect-ratio: 1; border: 1px solid currentColor; border-radius: 50%; background: #f5f3ef; }
+.panel-indicator::before { content: ""; position: absolute; top: calc(0px - clamp(2rem, 7vh, 4rem)); bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); background: #f5f3ef; }
+.panel-indicator::after { content: ""; position: absolute; top: 50%; left: 50%; width: 100vw; transform: translateX(-50%); border-top: 1px solid rgba(18, 18, 18, .12); pointer-events: none; }
+.panel-indicator a { position: relative; z-index: 1; display: grid; place-items: center; width: clamp(3rem, 5.5vw, 4rem); aspect-ratio: 1; border: 1px solid currentColor; border-radius: 50%; background: #f5f3ef; }
 .panel-indicator a::before { content: ""; position: absolute; inset: -.35rem; border: 1px dashed currentColor; border-radius: 50%; }
 .panel-indicator a[aria-current] { background: #121212; color: #f5f3ef; }
 .panel-indicator a[aria-current]::before { border-color: #121212; }
