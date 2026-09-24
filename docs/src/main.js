@@ -24,6 +24,22 @@ if (!location.pathname.endsWith('/resume.html')) {
   app.querySelector('nav').innerHTML = '<a href="./resume.html">Resume</a>';
   const resumePanel = app.querySelector('.placeholder-window:nth-child(3) .placeholder-panel');
   resumePanel.replaceWith(Object.assign(document.createElement('a'), { className: resumePanel.className, href: './resume.html', innerHTML: resumePanel.innerHTML }));
+  const windows = [...app.querySelectorAll('.placeholder-window')];
+  windows.forEach((window, index) => {
+    window.id = `panel-${index + 1}`;
+    const indicator = document.createElement('nav');
+    indicator.className = 'panel-indicator';
+    indicator.setAttribute('aria-label', 'Panel navigation');
+    windows.forEach((target, targetIndex) => {
+      const link = document.createElement('a');
+      link.href = `#panel-${targetIndex + 1}`;
+      link.setAttribute('aria-label', target.querySelector('span').textContent);
+      if (target === window) link.setAttribute('aria-current', 'step');
+      link.append(target.querySelector('svg').cloneNode(true));
+      indicator.append(link);
+    });
+    window.prepend(indicator);
+  });
   app.querySelector('.placeholder-stage').id = 'panels';
   const scrollCue = app.querySelector('.scroll-cue');
   scrollCue.href = '#panels';

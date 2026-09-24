@@ -16,7 +16,14 @@ nav a:hover, nav a:focus-visible { text-decoration: underline; text-underline-of
 .scroll-cue::before { border-bottom: .24rem solid currentColor; border-right: .24rem solid currentColor; content: ""; height: .85rem; transform: translateY(-.18rem) rotate(45deg); width: .85rem; }
 .scroll-cue:hover, .scroll-cue:focus-visible { box-shadow: 0 .75rem 1.1rem rgba(18, 18, 18, .26), 0 1.4rem 2.2rem rgba(18, 18, 18, .16), inset 0 .08rem .12rem rgba(255, 255, 255, .9); transform: translateX(-50%) translateY(-.15rem); }
 .placeholder-stage { --placeholder-card-size: clamp(7.6rem, 14vw, 10rem); margin-inline: -2rem; }
-.placeholder-window { display: flex; align-items: center; min-height: 100vh; min-height: 100svh; padding-inline: 2rem; scroll-snap-align: start; }
+.placeholder-window { display: flex; align-items: center; min-height: 100vh; min-height: 100svh; padding-inline: 2rem; position: relative; scroll-snap-align: start; }
+.panel-indicator { position: absolute; top: clamp(2rem, 7vh, 4rem); left: 50%; transform: translateX(-50%); width: min(calc(100% - 4rem), 450px); justify-content: space-between; gap: 0; }
+.panel-indicator::before { content: ""; position: absolute; top: 50%; left: 0; right: 0; border-top: 1px solid currentColor; }
+.panel-indicator a { position: relative; display: grid; place-items: center; width: clamp(3rem, 5.5vw, 4rem); aspect-ratio: 1; border: 1px solid currentColor; border-radius: 50%; background: #f5f3ef; }
+.panel-indicator a::before { content: ""; position: absolute; inset: -.35rem; border: 1px dashed currentColor; border-radius: 50%; }
+.panel-indicator a[aria-current] { background: #121212; color: #f5f3ef; }
+.panel-indicator a[aria-current]::before { border-color: #121212; }
+.panel-indicator svg { width: 40%; height: 40%; fill: none; stroke: currentColor; stroke-width: 1.5; }
 .placeholder-panel { border: 1px solid rgba(18, 18, 18, .22); border-radius: 1.25rem; box-shadow: 0 .85rem 1.6rem rgba(18, 18, 18, .20), 0 3rem 5rem rgba(18, 18, 18, .16); height: var(--placeholder-card-size); width: min(100%, 500px); text-decoration: none; }
 .placeholder-panel-talks { align-items: center; display: flex; gap: 1.25rem; padding: clamp(1.25rem, 3vw, 2.5rem); }
 .placeholder-panel-talks svg { fill: none; flex: none; height: 3rem; stroke: currentColor; stroke-width: 1.5; width: 3rem; }
@@ -54,4 +61,4 @@ li + li { margin-top: .55rem; }
 .expertise + h3 { margin-top: 3rem; }
 .expertise span { border: 1px solid #9f9c94; border-radius: 99rem; padding: .55rem .8rem; }
 footer { border-top: 1px solid #cbc7bd; color: #666; padding-block: 2rem; }
-@media (max-width: 720px) { html:has(.placeholder-stage) { scroll-snap-type: y proximity; } .site-header, main, footer { padding-inline: 1.25rem; } .site-header { display: block; padding-block: 1.25rem; } nav { flex-wrap: wrap; gap: .55rem .8rem; margin-top: .8rem; font-size: .78rem; } .hero, .two-column, .role { grid-template-columns: 1fr; gap: 1.25rem; } .hero { min-height: auto; padding: 2rem 1.25rem 2.5rem; } h1 { font-size: clamp(2.25rem, 11vw, 4.5rem); } .eyebrow { white-space: normal; } .portrait { max-width: 360px; height: min(480px, 110vw); } .placeholder-stage { margin-inline: -1.25rem; } .placeholder-window { padding-inline: 1.25rem; } .section { padding: 2rem 0 3rem; } .two-column > h2 { transform: none; } .hero + .section { margin-top: 0; } }
+@media (max-width: 720px) { html:has(.placeholder-stage) { scroll-snap-type: y proximity; } .site-header, main, footer { padding-inline: 1.25rem; } .site-header { display: block; padding-block: 1.25rem; } nav { flex-wrap: wrap; gap: .55rem .8rem; margin-top: .8rem; font-size: .78rem; } .hero, .two-column, .role { grid-template-columns: 1fr; gap: 1.25rem; } .hero { min-height: auto; padding: 2rem 1.25rem 2.5rem; } h1 { font-size: clamp(2.25rem, 11vw, 4.5rem); } .eyebrow { white-space: normal; } .portrait { max-width: 360px; height: min(480px, 110vw); } .placeholder-stage { margin-inline: -1.25rem; } .placeholder-window { padding-inline: 1.25rem; } .panel-indicator { width: min(calc(100% - 3rem), 450px); flex-wrap: nowrap; } .panel-indicator a { width: 2.75rem; } .section { padding: 2rem 0 3rem; } .two-column > h2 { transform: none; } .hero + .section { margin-top: 0; } }
