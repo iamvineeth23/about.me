@@ -15,49 +15,17 @@ app.innerHTML = `
 `;
 
 app.querySelector('.hero').insertAdjacentHTML('beforeend', '<a class="scroll-cue" href="#summary" aria-label="Scroll to summary"></a>');
-app.querySelector('.hero').insertAdjacentHTML('afterend', '<div class="placeholder-stage"><div class="collapsed-panels"></div><div class="placeholder-panels"><div class="placeholder-panel placeholder-panel-talks"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="m10 8 6 4-6 4Z" /></svg><span>Watch my talks..</span></div><div class="placeholder-panel" aria-hidden="true"></div><div class="placeholder-panel" aria-hidden="true"></div><div class="placeholder-panel" aria-hidden="true"></div></div></div>');
 
-const placeholderCards = [...app.querySelectorAll('.placeholder-panel')];
-const placeholderPanels = app.querySelector('.placeholder-panels');
-const collapsedPanels = app.querySelector('.collapsed-panels');
-const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const collapseDuration = 700;
-let collapsedCount = 0;
-let collapseScrolls = [];
-let lastScrollY = scrollY;
-let nextCollapseAfter = 0;
+if (location.pathname.endsWith('/resume.html')) app.querySelector('.brand').href = './';
 
-function movePlaceholderCard(card, destination) {
-  const previous = placeholderCards.map((card) => card.getBoundingClientRect());
-  destination(card);
-  placeholderPanels.parentElement.classList.toggle('has-boxes', collapsedCount > 0);
-  placeholderCards.forEach((card, index) => {
-    const next = card.getBoundingClientRect();
-    if (!reducedMotion && (previous[index].width !== next.width || previous[index].top !== next.top)) {
-      card.getAnimations().forEach((animation) => animation.cancel());
-      card.animate([{ transform: `translate(${previous[index].left - next.left}px, ${previous[index].top - next.top}px) scale(${previous[index].width / next.width}, ${previous[index].height / next.height})` }, { transform: 'none' }], { duration: collapseDuration, easing: 'ease', fill: 'both' });
-    }
-  });
+if (!location.pathname.endsWith('/resume.html')) {
+  app.querySelector('.hero').insertAdjacentHTML('afterend', '<div class="placeholder-stage"><div class="placeholder-panels"><div class="placeholder-panel placeholder-panel-talks"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="m10 8 6 4-6 4Z" /></svg><span>Watch my talks..</span></div><div class="placeholder-panel placeholder-panel-talks"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 9-3 3 3 3M16 9l3 3-3 3M14 5l-4 14" /></svg><span>My Projects</span></div><div class="placeholder-panel placeholder-panel-talks"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l3 3v15H6zM15 3v4h4M9 12h6M9 16h6" /></svg><span>Resume</span></div><div class="placeholder-panel placeholder-panel-talks"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3zM3 7l9 6 9-6" /></svg><span>Contact Me</span></div></div></div>');
+  app.querySelectorAll('main > .section, footer').forEach((element) => element.remove());
+  app.querySelector('nav').innerHTML = '<a href="./resume.html">Resume</a>';
+  const resumePanel = app.querySelector('.placeholder-panel:nth-child(3)');
+  resumePanel.replaceWith(Object.assign(document.createElement('a'), { className: resumePanel.className, href: './resume.html', innerHTML: resumePanel.innerHTML }));
+  app.querySelector('.placeholder-stage').id = 'panels';
+  const scrollCue = app.querySelector('.scroll-cue');
+  scrollCue.href = '#panels';
+  scrollCue.ariaLabel = 'Scroll to panels';
 }
-
-function updatePlaceholderCards() {
-  if (scrollY < lastScrollY) {
-    if (collapsedCount && scrollY < collapseScrolls[collapsedCount - 1] - 64) {
-      collapsedCount -= 1;
-      collapseScrolls.length = collapsedCount;
-      movePlaceholderCard(placeholderCards[collapsedCount], (card) => placeholderPanels.prepend(card));
-    }
-  } else if (collapsedCount < placeholderCards.length && performance.now() >= nextCollapseAfter && placeholderCards[collapsedCount].getBoundingClientRect().top < Math.max(window.innerHeight * .12, placeholderCards[collapsedCount].getBoundingClientRect().height + 48)) {
-    const card = placeholderCards[collapsedCount];
-    collapseScrolls.push(scrollY);
-    collapsedCount += 1;
-    nextCollapseAfter = performance.now() + collapseDuration;
-    movePlaceholderCard(card, (panel) => collapsedPanels.append(panel));
-  }
-  lastScrollY = scrollY;
-}
-
-addEventListener('scroll', updatePlaceholderCards, { passive: true });
-addEventListener('resize', updatePlaceholderCards);
-addEventListener('load', updatePlaceholderCards);
-updatePlaceholderCards();
