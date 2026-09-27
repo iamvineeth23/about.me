@@ -37,12 +37,12 @@ if (!location.pathname.endsWith('/resume.html')) {
         <li><strong>Sec.SDV Europe 2025</strong> - Beyond Regulations: Proactive Vulnerability Management for SDV</li>
         <li><strong>FAU Erlangen University (WS23 &amp; WS24)</strong> - Finding, Handling &amp; Preventing Automotive Software Vulnerabilities</li>
       </ul></div>
-      <small>Talk not recoreded. Contact for slides</small>
+      <small>Talk not recorded. Contact for slides.</small>
     </article>`);
   app.querySelectorAll('.placeholder-window')[1].insertAdjacentHTML('beforeend', `
     <div class="project-cards">
-      <article class="project-card"><div class="project-tags"><span>AI</span><span>Open source</span><span>Visualization</span></div><h3>AimViewer</h3><p>Visualizing LLM architecture, weights, activations and runtime flow to make models easier to inspect and understand.</p><span class="project-action">Private repo for now. Contact for source code</span></article>
-      <article class="project-card"><div class="project-tags"><span>Chess</span><span>AI</span><span>Experimental</span></div><h3>ChessWithJev</h3><p>Experimental implementation of playing Chess with Jev</p><span class="project-action">Private repo for now. Contact for source code</span></article>
+      <article class="project-card"><div class="project-tags"><span>AI</span><span>Open source</span><span>Visualization</span></div><h3>AimViewer</h3><p>Visualizing LLM architecture, weights, activations and runtime flow to make models easier to inspect and understand.</p><span class="project-action">Private repo for now. Contact for access.</span></article>
+      <article class="project-card"><div class="project-tags"><span>Chess</span><span>AI</span><span>Experimental</span></div><h3>ChessWithJev</h3><p>Experimental implementation of playing Chess with Jev</p><span class="project-action">Private repo for now. Contact for access.</span></article>
     </div>`);
   app.querySelector('nav').innerHTML = '<a href="#panel-1">Talks</a><a href="#panel-2">Projects</a><a href="#panel-3">Resume</a><a href="#panel-4">Contact</a>';
   const windows = [...app.querySelectorAll('.placeholder-window')];
