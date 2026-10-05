@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Chess with Jev: an open-source experiment exploring AI decision-making through chess, legal moves, and Stockfish analysis." />
+    <title>Chess with Jev — Exploring AI Decision-Making Through Chess</title>
+    <link rel="icon" href="./support/favicon.svg?v=3" type="image/svg+xml" />
+    <link rel="icon" href="./favicon.ico?v=3" sizes="any" />
+    <link rel="stylesheet" href="./src/style.css" />
+    <style>
+      .chess-article { padding-block: 3rem 5rem; }
+      .article-heading, .chess-article p, .chess-article ul, .chess-article h2, .chess-article h3, .chess-article blockquote, .chess-article pre { max-width: 750px; margin-inline: auto; }
+      .article-heading h1 { font-size: clamp(2.3rem, 5.5vw, 4.5rem); line-height: 1.08; letter-spacing: -.055em; white-space: normal; }
+      .chess-article h2 { border-top: 1px solid #cbc7bd; font-size: clamp(1.8rem, 3.5vw, 2.5rem); line-height: 1.15; margin-top: 3rem; padding-top: 2rem; }
+      .chess-article h3 { margin-top: 2rem; }
+      .chess-article blockquote { border-left: 2px solid #cbc7bd; padding-left: 1.25rem; margin-block: 1.5rem; }
+      .chess-article p { margin-block: 0 1.25rem; }
+      .chess-article ul { margin-block: 0 1.5rem; }
+      .article-image { margin: 2rem 0 3rem; }
+      .article-image img { display: block; width: 100%; height: auto; border: 1px solid #cbc7bd; border-radius: 1rem; }
+      .article-image a { display: block; border-radius: 1rem; }
+      .chess-article pre { border: 1px solid #cbc7bd; border-radius: 1rem; padding: 1.25rem; white-space: pre-wrap; overflow-wrap: anywhere; font-size: .9rem; line-height: 1.7; margin-block: 1.5rem; }
+      @media (max-width: 720px) { .chess-article { padding-block: 1.5rem 3rem; } .article-image { margin-block: 1.5rem 2rem; } }
+    </style>
+  </head>
+  <body>
+    <header class="site-header"><a class="brand" href="./">Vineeth</a><nav aria-label="Primary navigation"><a href="./#panel-2">Projects</a><a href="./resume.html">Resume</a></nav></header>
+    <main>
+      <article class="chess-article">
+        <header class="article-heading"><h1>ChessWithJev</h1><p class="lead">Exploring AI Decision-Making Through Chess</p></header>
+        <figure class="article-image"><img src="./support/banner.png" width="2051" height="767" alt="Chess with Jev — Play, analyse, and explore how Jev plays." fetchpriority="high" /></figure>
+        <p>I recently made public my repository <a href="https://github.com/iamvineeth23/ChessWithJev"><svg width="16" height="16" fill="currentColor" style="vertical-align: -.15em; margin-right: .3em;" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 3 .8.1-.6.4-1.1.7-1.3-2.3-.3-4.7-1.1-4.7-5A3.9 3.9 0 0 1 6.7 8c-.1-.3-.5-1.3.1-2.8 0 0 .9-.3 2.9 1.1a10 10 0 0 1 5.2 0c2-1.4 2.9-1.1 2.9-1.1.6 1.5.2 2.5.1 2.8a3.9 3.9 0 0 1 1.1 2.7c0 3.9-2.4 4.7-4.7 5 .4.3.7.9.7 1.8V21c0 .3.2.6.7.5A10 10 0 0 0 12 2Z" /></svg><strong>ChessWithJev</strong></a>, a small desktop chess application I built to experiment with how <strong>Jev from <a href="https://TypeSafe.ai">TypeSafe.ai</a> makes decisions in chess</strong>.</p>
+        <p>The goal was just to have fun. I explore how good Jev is at making decisions for chess. And as expected, it&#x27;s not a chess engine. I am not an chess genius, but I could also beat it easily.</p>
+        <p>For the project motivation itself, chess happens to be a very convenient environment for this: the board state can be represented precisely, the available actions are deterministic, and the quality of a decision can be compared against a strong traditional chess engine.</p>
+        <p>The project is <strong>ChessWithJev</strong>.</p>
+        <p>The application supports four player types:</p>
+        <ul>
+<li>Human</li>
+<li>Jev</li>
+<li>Stockfish</li>
+<li>Random</li>
+</ul>
+        <p>Any of them can play against any other. This means I can play against Jev myself, run <strong>Jev vs Stockfish</strong>, compare it against random play, or even let <strong>Jev play against Jev</strong>.</p>
+        <h2>The basic idea</h2>
+        <p>One important design decision was that <strong>Jev does not need to understand or implement the rules of chess</strong>.</p>
+        <p>That responsibility stays with the application.</p>
+        <p>For every turn, the application knows the current board state and generates every legal move available to the player. Jev only has to answer one question:</p>
+        <blockquote><p>Given this position and these legal moves, which move do you prefer?</p></blockquote>
+        <p>The flow is therefore relatively simple:</p>
+        <pre><code>Chess position (FEN)
+        ↓
+Generate all legal moves
+        ↓
+Build a Jev Choice
+        ↓
+Jev rates the available moves
+        ↓
+Rank the results
+        ↓
+Play the highest-rated move</code></pre>
+        <p>The board position is represented using <strong>FEN (Forsyth–Edwards Notation)</strong>.</p>
+        <p>A position might therefore result in a Jev request conceptually similar to:</p>
+        <pre><code>Current position:
+rnbqkbnr/pppp1ppp/8/4p3/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 0 2
+
+Choose the best move:
+
+d4e5 → Pawn from d4 to e5
+d4d5 → Pawn from d4 to d5
+g1f3 → Knight from g1 to f3
+c2c4 → Pawn from c2 to c4
+...</code></pre>
+        <p>Instead of asking Jev to generate a chess move from arbitrary text, the application uses Jev&#x27;s <strong><code>Choice</code></strong> interface and provides only moves that are actually legal in the current position.</p>
+        <p>That separation is useful.</p>
+        <p>The chess application handles:</p>
+        <pre><code>Board state
+Rules
+Legal move generation
+Move validation
+Game progression</code></pre>
+        <p>Jev handles:</p>
+        <pre><code>Decision-making between the available choices</code></pre>
+        <p>The highest-rated legal move becomes Jev&#x27;s move.</p>
+        <h2>Why use <code>Choice</code>?</h2>
+        <p>Rather than treating Jev like a traditional chess engine, I wanted to treat a chess turn as a <strong>decision problem</strong>.</p>
+        <p>At any given position, Jev receives a finite set of actions (all possible legal moves):</p>
+        <pre><code>Move A
+Move B
+Move C
+...
+Move N</code></pre>
+        <p>and has to express a preference between them.</p>
+        <p>The application can then expose not only the move Jev ultimately chooses, but also its <strong>highest-rated alternatives</strong>. That makes Jev&#x27;s behaviour much more interesting to inspect than simply displaying the final move (If one wants to go deep).</p>
+        <h2>Can every legal chess move fit into a Jev Choice?</h2>
+        <p>This was an interesting practical question for choosing current architecture.</p>
+        <p><strong>Nenad Petrović</strong> demonstrates a legally reachable position containing <strong>218 legal moves</strong>. As of October 4, 2026, Jev supports up to <strong>256 choices</strong>.</p>
+        <p>That means the architecture can simply send the entire legal move set to Jev in one <code>Choice</code> request rather than having to split the position into multiple requests or pre-filter candidate moves.</p>
+        <p>So the core implementation can remain:</p>
+        <pre><code>ALL legal moves → one Jev Choice → ranked result</code></pre>
+        <p>This was important to me because pre-selecting moves using Stockfish or another engine would influence the experiment before Jev even gets the opportunity to make its decision.</p>
+        <h2>Comparing Jev with Stockfish</h2>
+        <p>Stockfish is also integrated into the application, but it serves a different purpose.</p>
+        <p>It can act as a player, but it can also provide an independent reference for analysing positions and moves.</p>
+        <p>The UI therefore lets me look at things such as:</p>
+        <ul>
+<li>Jev&#x27;s chosen move</li>
+<li>Jev&#x27;s highest-rated alternative moves</li>
+<li>Stockfish&#x27;s preferred moves</li>
+<li>Position evaluation</li>
+<li>Move-by-move game history</li>
+</ul>
+        <p>The interesting question isn&#x27;t necessarily:</p>
+        <blockquote><p>Can Jev beat Stockfish?</p></blockquote>
+        <p>That would be a rather unfair benchmark for a system that isn&#x27;t designed to be a dedicated chess engine. See below for Stockfish with low ELO of 1500 vs Jev game.</p>
+        <p>I&#x27;m more interested in questions like:</p>
+        <blockquote><p>Does Jev consistently make reasonable decisions?<br />
+When does Jev agree with Stockfish?<br />
+When they disagree, what move does Jev prefer?<br />
+How strongly does Jev prefer its selected move over the alternatives?</p></blockquote>
+        <p>Chess gives me a useful environment for observing these differences because there is a very strong external reference available for comparison.</p>
+        <figure class="article-image"><a href="./support/ChessWithJev.png" aria-label="View the Chess with Jev application image at full size"><img src="./support/ChessWithJev.png" width="2050" height="767" alt="Chess with Jev interface showing the chessboard, Stockfish move analysis, Evaluation Plot and Jev Predictions tabs, and Move Log." loading="lazy" /></a></figure>
+        <h3>Game: Jev vs Stockfish-1500</h3>
+        <p>Stockfish even with rating of 1500 beat Jev comfortably.</p>
+        <pre><code>[Event &quot;ChessWithJev&quot;]
+[Site &quot;ChessWithJev&quot;]
+[Date &quot;2026.10.05&quot;]
+[Round &quot;01&quot;]
+[White &quot;Jev&quot;]
+[Black &quot;Stockfish-1500&quot;]
+[Result &quot;0-1&quot;]
+
+1. e4 c5 2. Nf3 Nc6 3. Nc3 a6 4. Nd5 e6 5. e5 exd5 6. Nd4 Nxd4 7. e6 Qe7 8. Be2 fxe6 9. O-O Nxe2+ 10. Qxe2 Qf6 11. Qxe6+ dxe6 12. d4 h6 13. dxc5 Bxc5 14. Bxh6 Nxh6 15. Rae1 Ng4 16. Rxe6+ Bxe6 17. Rd1 Qxf2+ 18. Kh1 Qg1+ 19. Rxg1 Rxh2# 0-1
+</code></pre>
+        <h2>Logging the games</h2>
+        <p>I also wanted the experiments to be reproducible rather than disappearing once a game was over. The application therefore records completed games and their associated analysis.</p>
+        <p>The latest game is stored as JSON, while games can also be saved as dated JSON files for later analysis (to be implemented).</p>
+        <p>Games can additionally be exported as <strong>PGN</strong>, making it possible to open them using normal chess tools.</p>
+        <p>This is also the basis for something I want to explore later: analysing many Jev games rather than looking at individual decisions in isolation.</p>
+        <p>That could make it possible to inspect patterns such as how Jev performs across different positions, where its largest differences from Stockfish occur, or how its decisions change throughout a game.</p>
+        <h2>Running it yourself</h2>
+        <p>The project is now in public repository on my github: <a href="https://github.com/iamvineeth23/ChessWithJev/">ChessWithJev</a>.</p>
+        <p>It is currently built using <strong>Python and NiceGUI</strong>, with Stockfish used for chess analysis.</p>
+        <p>If you want to experiment with Jev, you provide your own API key through the environment:</p>
+        <pre><code>export JEV_API_KEY=&quot;your-api-key&quot;</code></pre>
+        <p>or load it from a local <code>.env</code> file.</p>
+        <p>Then you can select <strong>Jev</strong> as either White or Black and pair it with any of the available players.</p>
+        <p>So you can run:</p>
+        <pre><code>Human     vs Jev
+Jev       vs Stockfish
+Jev       vs Random
+Jev       vs Jev</code></pre>
+        <p>and watch the decisions directly from the application.</p>
+        <p>At the moment I&#x27;ve only coded and tested the project for <strong>macOS</strong>. Linux support is something I intend to add next.</p>
+        <h2>What&#x27;s next?</h2>
+        <p>One thing I&#x27;d like to explore next is adding support for <strong>local models through Ollama</strong>, such as <a href="https://ollama.com/library/nimble">Nimble</a> or <a href="https://ollama.com/library/clef">Clef</a>.</p>
+        <p>That introduces a different architectural problem.</p>
+        <p>Unlike the current Jev approach, models with a smaller maximum number of choices cannot necessarily receive every legal chess move in a single request. Since some chess positions can contain far more than 26 legal moves, supporting those models will require a different decision strategy rather than simply replacing the Jev call.</p>
+        <p>That&#x27;s an experiment for another day.</p>
+        <p>For now, <strong>Chess with Jev</strong> gives me exactly what I wanted: a small, measurable environment where I can observe an AI making decisions, inspect the alternatives it considered, and compare those decisions against humans, random play, and one of the strongest traditional chess engines available.</p>
+        <p>And now that it&#x27;s open source, anyone with a Jev API key can try the same experiments.</p>
+      </article>
+    </main>
+  </body>
+</html>
