@@ -176,6 +176,7 @@ How strongly does Jev prefer its selected move over the alternatives?</p></block
 1. e4 e5 2. Nf3 Nf6 3. d4 exd4 4. Qxd4 d6 5. Qxd6 cxd6 6. Nc3 Bg4 7. Bb5+ Nfd7 8. O-O Nc6 9. Bxc6 Be7 10. Bxd7+ Qxd7 11. e5 Bxf3 12. exd6 Qg4 13. d7+ Kd8 14. Nd5 Qxg2# 0-1
 </code></pre>
         <figure class="article-image" style="max-width: 750px; margin-inline: auto;"><img src="./support/gameplay.png" width="2200" height="1632" alt="Chess with Jev gameplay showing the board, Stockfish move analysis, Jev predictions, and move log." loading="lazy" /><figcaption><small>Gameplay screenshot</small></figcaption></figure>
+        <p>Note: this gameplay costed around $ 0.0003 in typesafe API cost.</p>
         <h2 class="logging-heading">Logging the games</h2>
         <p>I also wanted the experiments to be reproducible rather than disappearing once a game was over. The application therefore records completed games and their associated analysis.</p>
         <p>The latest game is stored as JSON, while games can also be saved as dated JSON files for later analysis. I am still building the analysis engine to compare between different play modes.</p>
